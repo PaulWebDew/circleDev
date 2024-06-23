@@ -1,0 +1,41 @@
+.button {
+  padding: .25rem;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border: 1px white solid;
+  padding: .2rem .75rem;
+  margin-top: .5rem;
+  border-radius: 0.5rem;
+  color: white;
+  font-weight: bolder;
+  background-color: rgba(155, 175, 172, 0.68);
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.modalButtons {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: .5rem;
+  margin-top: .5rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    word-break: break-all;
+  }
+  .buttons {
+    flex-direction: column;
+  }
+}

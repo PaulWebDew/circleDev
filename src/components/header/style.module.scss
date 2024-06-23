@@ -1,0 +1,44 @@
+.header {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(182, 169, 127, 0.45);
+  background: rgb(160, 164, 131);
+  background: var(--bg-radial);
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  gap: 2rem;
+
+  a {
+    text-decoration: none;
+    color: white;
+    font-weight: bolder;
+
+    &:hover {
+      filter: brightness(90%);
+    }
+
+    &:active {
+      filter: brightness(80%);
+    }
+  }
+}
+
+.logo {
+  color: aliceblue;
+  display: flex;
+  align-items: end;
+  cursor: pointer;
+}
+
+.firstLetter {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 4px;
+  font-size: 14px;
+
+}
