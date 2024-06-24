@@ -7,6 +7,7 @@ import { categoryApi } from "../../../api/categories.api.ts";
 import cls from "./style.module.scss";
 import { Modal } from "../modal";
 import { Input } from "../Input";
+import toast from "react-hot-toast";
 
 export const EditInputField: FC<IEditInputFieldProps> = ({
   value,
@@ -25,9 +26,13 @@ export const EditInputField: FC<IEditInputFieldProps> = ({
       .unwrap()
       .then((data) => {
         console.log(data);
+        toast.success("deleted successfully.");
         setIsOpenModal(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        toast.error(err.message || "An error occurred.");
+        console.log(err);
+      });
   };
 
   const saveItem = async () => {
@@ -39,8 +44,14 @@ export const EditInputField: FC<IEditInputFieldProps> = ({
     editCategory(body)
       .unwrap()
       .then((data) => {
+        console.log("data");
+        toast("Edited successfully.");
         console.log(data);
         setIsOpenEditModal(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("An error occurred.");
       });
   };
 

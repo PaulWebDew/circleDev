@@ -7,6 +7,7 @@ import { Input } from "../Input";
 
 import cls from "./style.module.scss";
 import { taskApi } from "../../../api/tasks.api.ts";
+import toast from "react-hot-toast";
 
 export const EditTaskField: FC<IEditTaskProps> = ({ value, ...props }) => {
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
@@ -20,6 +21,7 @@ export const EditTaskField: FC<IEditTaskProps> = ({ value, ...props }) => {
       .unwrap()
       .then((data) => {
         console.log(data);
+        toast.success("deleted successfully.");
         setIsOpenDeleteModal(false);
       })
       .catch((err) => console.log(err));
@@ -30,6 +32,7 @@ export const EditTaskField: FC<IEditTaskProps> = ({ value, ...props }) => {
     editTask(body)
       .unwrap()
       .then((data) => {
+        toast.success("modified successfully.");
         console.log(data);
         setIsOpenEditModal(false);
       })
