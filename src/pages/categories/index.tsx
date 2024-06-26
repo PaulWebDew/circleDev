@@ -10,15 +10,19 @@ import { ITask } from "../../api/types.ts";
 import cls from "./style.module.scss";
 import { EditTaskField } from "../../components/ui/editTaskField";
 import { categoryApi } from "../../api/categories.api.ts";
+import { useModalTimer } from "../../hooks/modalTimer.ts";
+import clsx from "clsx";
 
 export const CategoriesPage: FC = () => {
   const params = useParams();
   const [isOpenCreateModal, setIsOpenCreateModal] = useState(false);
   const [taskValue, setTaskValue] = useState("");
-  const [createTask] = taskApi.useCreateTaskMutation({});
+  const [createTask] = taskApi.useCreateTaskMutation();
   const id = params.id;
-  const { data: Tasks } = taskApi.useGetTasksQuery(id);
-  const { data: Category } = categoryApi.useGetOneCategoryQuery(id);
+  const { data: tasks } = taskApi.useGetTasksQuery(id);
+  const { data: category } = categoryApi.useGetOneCategoryQuery(id);
+
+  const { isActive, start } = useModalTimer(1000);
 
   const createTaskFetch = () => {
     id &&
@@ -26,6 +30,7 @@ export const CategoriesPage: FC = () => {
         .unwrap()
         .then((data) => {
           console.log(data);
+          start();
           setIsOpenCreateModal(false);
         })
         .catch((err) => console.log(err));
@@ -37,11 +42,11 @@ export const CategoriesPage: FC = () => {
   };
   return (
     <section className={cls.container}>
-      {Category && <h1>{Category.title}</h1>}
+      {category && <h1>{category.title}</h1>}
       <div className={cls.content}>
         <ul>
-          {Tasks?.map((task: ITask, index: number) => (
-            <li key={index}>
+          {tasks?.map((task: ITask) => (
+            <li key={task._id}>
               <EditTaskField value={task} />
             </li>
           ))}
@@ -67,6 +72,10 @@ export const CategoriesPage: FC = () => {
           <Button onClick={createTaskFetch}>Save</Button>
         </div>
       </Modal>
+
+      <div className={clsx(cls.modal, isActive && cls.modalActive)}>
+        <h3>created successfully</h3>
+      </div>
     </section>
   );
 };

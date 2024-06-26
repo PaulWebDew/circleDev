@@ -6,11 +6,11 @@ export const categoryApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_SERVER_URL }),
   tagTypes: ["Category"],
   endpoints: (builder) => ({
-    getCategories: builder.query({
+    getCategories: builder.query<ICategory[], any>({
       query: () => `/category`,
       providesTags: ["Category"],
     }),
-    getOneCategory: builder.query({
+    getOneCategory: builder.query<ICategory, any>({
       query: (id) => `/category/${id}`,
       providesTags: ["Category"],
     }),

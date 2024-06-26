@@ -13,21 +13,21 @@ export const EditInputField: FC<IEditInputFieldProps> = ({
   value,
   ...props
 }) => {
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
   const [editCategoryValue, setEditCategoryValue] = useState<string>(
     value.title,
   );
-  const [deleteCategory] = categoryApi.useDeleteCategoryMutation({});
-  const [editCategory] = categoryApi.useEditCategoryMutation({});
+  const [deleteCategory] = categoryApi.useDeleteCategoryMutation();
+  const [editCategory] = categoryApi.useEditCategoryMutation();
 
-  const deleteItem = async () => {
-    await deleteCategory(value._id)
+  const deleteItem = () => {
+    deleteCategory(value._id)
       .unwrap()
       .then((data) => {
         console.log(data);
+        setIsOpenDeleteModal(false);
         toast.success("deleted successfully.");
-        setIsOpenModal(false);
       })
       .catch((err) => {
         toast.error(err.message || "An error occurred.");
@@ -59,7 +59,10 @@ export const EditInputField: FC<IEditInputFieldProps> = ({
     <div {...props} className={cls.container}>
       {value.title}
       <div className={cls.buttons}>
-        <Button buttonClass={cls.button} onClick={() => setIsOpenModal(true)}>
+        <Button
+          buttonClass={cls.button}
+          onClick={() => setIsOpenDeleteModal(true)}
+        >
           <DeleteIcon height={14} width={14} title={"Delete"} />
         </Button>
         <Button
@@ -70,10 +73,13 @@ export const EditInputField: FC<IEditInputFieldProps> = ({
         </Button>
       </div>
 
-      <Modal open={isOpenModal} closeModal={() => setIsOpenModal(false)}>
+      <Modal
+        open={isOpenDeleteModal}
+        closeModal={() => setIsOpenDeleteModal(false)}
+      >
         <div>Delete "{value.title}" category? </div>
         <div className={cls.modalButtons}>
-          <Button onClick={() => setIsOpenModal(false)}>Cancel</Button>
+          <Button onClick={() => setIsOpenDeleteModal(false)}>Cancel</Button>
           <Button onClick={deleteItem}>Delete</Button>
         </div>
       </Modal>
@@ -90,7 +96,7 @@ export const EditInputField: FC<IEditInputFieldProps> = ({
           }
         />
         <div className={cls.modalButtons}>
-          <Button onClick={() => setIsOpenModal(false)}>Cancel</Button>
+          <Button onClick={() => setIsOpenEditModal(false)}>Cancel</Button>
           <Button onClick={saveItem}>Save</Button>
         </div>
       </Modal>

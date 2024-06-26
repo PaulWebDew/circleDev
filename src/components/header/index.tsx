@@ -1,6 +1,6 @@
-import { type FC } from "react";
+import {type FC} from "react";
 import cls from "./style.module.scss";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 export const Header: FC = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ export const Header: FC = () => {
         </div>
       </div>
       <nav>
-        <a href="/">Home</a>
+        <Link to={'/'}>Home</Link>
       </nav>
     </header>
   );

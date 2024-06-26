@@ -18,6 +18,7 @@
 
 .listItem {
   cursor: pointer;
+  text-decoration-line: none;
 }
 
 .modalButtons {
@@ -39,6 +40,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.modal {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: #d6ecc3;
+  border-radius: 1rem;
+  padding: 2rem;
+  opacity: 0;
+  transition: all ease-in-out 0.3s;
+
+  h3 {
+    color: black;
+    font-size: 1rem;
+    font-weight: normal;
+  }
+}
+
+.modalActive {
+  opacity: 1;
+
 }
 
 @media (max-width: 768px) {

@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { ICategory, ICreateTaskBody, IEditData } from "./types";
+import { ICategory, ICreateTaskBody, IEditData, ITask } from "./types";
 
 export const taskApi = createApi({
   reducerPath: "taskApi",
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_SERVER_URL }),
   tagTypes: ["Tasks"],
   endpoints: (builder) => ({
-    getTasks: builder.query({
+    getTasks: builder.query<ITask[], any>({
       query: (id) => `/task/${id}`,
       providesTags: ["Tasks"],
     }),

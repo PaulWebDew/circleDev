@@ -23,6 +23,22 @@
   }
 }
 
+.modal {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: #d6ecc3;
+  border-radius: 1rem;
+  padding: 2rem;
+  opacity: 0;
+  transition: all ease-in-out 0.3s;
+}
+
+.modalActive {
+  opacity: 1;
+}
+
+
 .addCat {
   margin-top: 1rem;
   margin-right: 0;
